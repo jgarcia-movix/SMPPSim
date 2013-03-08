@@ -204,7 +204,7 @@ public class SMPPSim {
 
 	public static void main(String args[]) throws Exception {
 		System.out.println("SMPPSim is starting....");
-		if ((args == null) || (args.length != 1)) {
+		if ((args == null) || (args.length != 3)) {
 			showUsage();
 			return;
 		}
@@ -215,6 +215,10 @@ public class SMPPSim {
 		initialise(props);
 		showLegals();
 		showConfiguration();
+		
+        smppPort = Integer.parseInt(args[1]);
+        HTTPPort = Integer.parseInt(args[2]);
+		
 		SMPPSim SMPPSim = new SMPPSim();
 		try {
 			Smsc smsc = Smsc.getInstance();
@@ -244,7 +248,7 @@ public class SMPPSim {
 		http400Response = http400Message.getBytes();
 
 		maxConnectionHandlers = Integer.parseInt(props.getProperty("SMPP_CONNECTION_HANDLERS"));
-		smppPort = Integer.parseInt(props.getProperty("SMPP_PORT"));
+		//smppPort = Integer.parseInt(props.getProperty("SMPP_PORT"));
 		connectionHandlerClassName = props.getProperty("CONNECTION_HANDLER_CLASS");
 		protocolHandlerClassName = props.getProperty("PROTOCOL_HANDLER_CLASS");
 		lifeCycleManagerClassName = props.getProperty("LIFE_CYCLE_MANAGER");
@@ -269,7 +273,7 @@ public class SMPPSim {
 		}
 		esme_systemid = props.getProperty("OUTBIND_ESME_SYSTEMID", "smppclient1");
 		esme_password = props.getProperty("OUTBIND_ESME_PASSWORD", "password");
-		HTTPPort = Integer.parseInt(props.getProperty("HTTP_PORT"));
+		//HTTPPort = Integer.parseInt(props.getProperty("HTTP_PORT"));
 		HTTPThreads = Integer.parseInt(props.getProperty("HTTP_THREADS"));
 		docroot = props.getProperty("DOCROOT");
 		authorisedFiles = props.getProperty("AUTHORISED_FILES");
